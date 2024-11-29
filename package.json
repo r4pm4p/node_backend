@@ -1,0 +1,14 @@
+{
+  "name": "node_backend",
+  "version": "1.0.0",
+  "description": "Node.js backeend api for use as the main service provider for the \"rapmap\" application project",
+  "main": "main.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^5.1.0"
+  }
+}
