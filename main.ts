@@ -1,1 +1,1 @@
-console.log("mainfunctionfor")
+console.log("entry_point");

@@ -4,11 +4,22 @@
   "description": "Node.js backeend api for use as the main service provider for the \"rapmap\" application project",
   "main": "main.ts",
   "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "nodemon --exec ts-node main.ts",
+    "prod": "node dist/main.js",
     "test": "test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fastify": "^5.1.0"
+    "dotenv": "^16.4.5",
+    "fastify": "^5.1.0",
+    "mongodb": "^6.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.2",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
   }
 }
