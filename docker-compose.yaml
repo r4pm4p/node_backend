@@ -1,0 +1,26 @@
+services:
+  bound2-database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "bound2_password"
+      POSTGRES_DATABASE: "bound2"
+      ports:
+        - "54390:5432"
+      networks:
+        - donda-network
+      container_name: bound2-postgres-database
+
+  graduation-api:
+    image:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3031:3031"
+    networks:
+      - donda-network
+    container_name: graduation-node-api
+
+networks:
+  donda-network:
+    driver: bridge
+
