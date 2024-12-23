@@ -9,4 +9,5 @@ router.start();
 
 fastify.listen({
   port: process.env.PORT as number | undefined,
+  host: process.env.HOST
 });

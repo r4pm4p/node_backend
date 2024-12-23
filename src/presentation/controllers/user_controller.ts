@@ -18,8 +18,7 @@ export class UserController implements Controller {
     return await this.response_handler.success(reply, ResponseCode.Ok, {
       messageCode: "data-retrieve-success",
       body: {
-        data: "s",
-        
+        data: "fabriciobruno",
       },
     });
   };
@@ -31,7 +30,7 @@ export class UserController implements Controller {
     return await this.response_handler.success(reply, ResponseCode.Ok, {
       messageCode: "data-retrieve-success",
       body: {
-        data: "s",
+        data: "sskrfsdfr",
       },
     });
   };
