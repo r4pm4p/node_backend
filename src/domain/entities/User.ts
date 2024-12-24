@@ -1,23 +1,20 @@
-import { Phone } from "../value-objects/Phone";
+import { EntitiesInterface } from "../../application/interfaces/EntitiesInterface";
 
-export class User {
+export class User implements EntitiesInterface {
   private id: string;
   private name: string;
   private email: string;
-  private phone: Phone;
   private password: string;
 
   constructor(
     id: string,
     name: string,
     email: string,
-    phone: Phone,
     password: string
   ) {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.phone = phone;
     this.password = password;
   }
 
@@ -30,7 +27,14 @@ export class User {
   protected changeName(new_name: string) {
     this.name = new_name;
   }
-  protected changePhoneNumber(new_phone: Phone) {
-    this.phone = new_phone;
+
+  public toDTO = () => {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      password: this.password
+    }
   }
+
 }

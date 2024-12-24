@@ -1,5 +1,5 @@
 import { User } from "../../domain/entities/User";
-import { UserRepository } from "../../domain/repository/UserRepository";
+import { UserRepository } from "../../domain/repository/ModelRepository";
 import ServicesInterface from "../interfaces/ServicesInterface";
 
 export class RegisterUserService implements ServicesInterface {

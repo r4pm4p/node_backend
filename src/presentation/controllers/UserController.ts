@@ -1,37 +1,44 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { Controller } from "../interfaces/Controller";
-import { Response } from "../helpers/Response";
 import { User } from "../../domain/entities/User";
-import { ResponseCode } from "../enums/ResponseCode";
+import { UserRepositoryImplementation } from "../../infrastructure/repository/UserRepositoryImplementation";
 
 export class UserController implements Controller {
-  private response_handler: Response<User>;
+  private userRepository: UserRepositoryImplementation;
 
   constructor() {
-    this.response_handler = new Response();
+    this.userRepository = new UserRepositoryImplementation();
   }
 
   public getAllUsers = async (
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<FastifyReply> => {
-    return await this.response_handler.success(reply, ResponseCode.Ok, {
-      messageCode: "data-retrieve-success",
-      body: {
-        data: "fabriciobruno",
-      },
-    });
+
+    const userData: Array<User> = await this.userRepository.findAll();
+    
+    return reply.send(userData)
+
   };
 
   public registerNewUser = async (
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<FastifyReply> => {
-    return await this.response_handler.success(reply, ResponseCode.Ok, {
-      messageCode: "data-retrieve-success",
-      body: {
-        data: "sskrfsdfr",
-      },
+
+    const data = request.body as any;
+    const user: User = new User(
+      data.id,
+      data.name,
+      data.email,
+      data.password
+    );
+
+    await this.userRepository.save(user)
+
+    return reply.send({
+      "code": 200,
+      "message": "Data is stored"
     });
   };
 }
