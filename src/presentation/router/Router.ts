@@ -1,20 +1,24 @@
 import { FastifyInstance } from "fastify";
 import { UserController } from "../controllers/UserController";
+import LoginController from "../controllers/LoginController";
+import Auth from "../Middleware/Auth";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
 
   public start = () => {
 
-    this.server.get("/show/users/all", new UserController().getAllUsers); // root
+    this.server.post("/login", new LoginController().login);
 
-    this.server.post("/register/user", new UserController().registerNewUser); // any
+    this.server.get("/show/users/all", {
+      preHandler: [Auth.admin]
+    }, new UserController().getAllUsers); // root
+
+    this.server.post("/register/user", { preHandler: Auth.login }, new UserController().registerNewUser); // any
     this.server.post("/register/mc", () => null); // user
     this.server.post("/register/owner", () => null); // user 
 
     this.server.post("/confirm/presence/:eventId", () => null) // user
-
-    this.server.post("/login", () => null); // user
 
     this.server.get("/show/all/battle", () => null); // user
     this.server.get("/show/all/event", () => null); // user

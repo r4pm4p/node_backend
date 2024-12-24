@@ -24,7 +24,7 @@ export class UserController implements Controller {
   public registerNewUser = async (
     request: FastifyRequest,
     reply: FastifyReply
-  ): Promise<FastifyReply> => {
+  ) => {
 
     const data = request.body as any;
 

@@ -30,6 +30,14 @@ export class UserRepositoryImplementation implements ModelRepository {
 
   };
 
+  public findByEmail = async (email: string) => {
+    return await UserDTO.findOne({
+      where: {
+        email: email
+      }
+    })
+  }
+
   public delete = async (id: string): Promise<boolean> => {
     throw new Error("not suportesr");
   }
