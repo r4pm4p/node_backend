@@ -8,6 +8,6 @@ const router: Router = new Router(fastify);
 router.start();
 
 fastify.listen({
-  port: process.env.PORT as number | undefined,
-  host: process.env.HOST
+  port: process.env.APP_PORT as number | undefined,
+  host: process.env.APP_HOST
 });

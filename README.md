@@ -29,10 +29,15 @@ cd <nome_do_repositorio>
 
 3. Para rodar o projeto, utilize o comando
 ```bash
+npm install
+```
+
+4. Para rodar o projeto, utilize o comando
+```bash
 docker-compose up --build
 ```
 
-4. Para fechar o projeto, utilize o comando
+5. Para fechar o projeto, utilize o comando
 ```bash
 docker-compose down
 ```

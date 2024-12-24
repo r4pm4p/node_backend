@@ -11,7 +11,7 @@ export class UserController implements Controller {
     this.response_handler = new Response();
   }
 
-  public index = async (
+  public getAllUsers = async (
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<FastifyReply> => {
@@ -23,7 +23,7 @@ export class UserController implements Controller {
     });
   };
 
-  public store = async (
+  public registerNewUser = async (
     request: FastifyRequest,
     reply: FastifyReply
   ): Promise<FastifyReply> => {
