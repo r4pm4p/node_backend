@@ -16,7 +16,7 @@ export class UserController implements Controller {
   ): Promise<FastifyReply> => {
 
     const userData: Array<User> = await this.userRepository.findAll();
-    
+
     return reply.send(userData)
 
   };
@@ -27,6 +27,8 @@ export class UserController implements Controller {
   ): Promise<FastifyReply> => {
 
     const data = request.body as any;
+
+
     const user: User = new User(
       data.id,
       data.name,
@@ -35,8 +37,7 @@ export class UserController implements Controller {
     );
 
     await this.userRepository.save(user)
-
-    return reply.send({
+    return reply.code(200).send({
       "code": 200,
       "message": "Data is stored"
     });

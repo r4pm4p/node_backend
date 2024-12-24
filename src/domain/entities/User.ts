@@ -1,10 +1,12 @@
+import { Hash } from "../../application/Facades/Hash";
 import { EntitiesInterface } from "../../application/interfaces/EntitiesInterface";
+const crypto = require("crypto")
 
 export class User implements EntitiesInterface {
   private id: string;
   private name: string;
   private email: string;
-  private password: string;
+  private password?: string;
 
   constructor(
     id: string,
@@ -15,7 +17,15 @@ export class User implements EntitiesInterface {
     this.id = id;
     this.name = name;
     this.email = email;
-    this.password = password;
+    this.password = this.hashPassword(password)
+  }
+
+  private hashPassword(plainPassword: string): string {
+    try {
+      return Hash.make(plainPassword);
+    } catch (err) {
+      throw new Error('Error hashing password');
+    }
   }
 
   protected updateEmail(new_email: string) {

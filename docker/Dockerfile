@@ -5,6 +5,8 @@ WORKDIR /usr/app
 COPY . .
 COPY ../package.json .
 
+RUN mv example.env .env
+
 RUN npm update
 RUN npm install
 
