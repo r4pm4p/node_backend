@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { UserController } from "../controllers/user_controller";
+import { UserController } from "../controllers/UserController";
 
 export class Router {
   constructor(private server: FastifyInstance) { }

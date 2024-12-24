@@ -1,5 +1,5 @@
 import { FastifyInstance } from "fastify";
-import { Router } from "./src/presentation/router/router";
+import { Router } from "./src/presentation/router/Router";
 require("dotenv").config();
 
 const fastify: FastifyInstance = require("fastify")({ logger: true });

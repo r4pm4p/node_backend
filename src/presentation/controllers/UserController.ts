@@ -1,8 +1,8 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { Controller } from "../interfaces/controller";
-import { Response } from "../helpers/response";
+import { Controller } from "../interfaces/Controller";
+import { Response } from "../helpers/Response";
 import { User } from "../../domain/entities/User";
-import { ResponseCode } from "../enums/response_code_enum";
+import { ResponseCode } from "../enums/ResponseCode";
 
 export class UserController implements Controller {
   private response_handler: Response<User>;

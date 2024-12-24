@@ -1,6 +1,6 @@
 import { FastifyReply } from "fastify";
-import { ResponseData } from "../interfaces/response_data";
-import { ResponseCode } from "../enums/response_code_enum";
+import { ResponseData } from "../interfaces/ResponseData";
+import { ResponseCode } from "../enums/ResponseCode";
 
 export class Response<T> {
   public success = async (
