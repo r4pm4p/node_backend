@@ -41,3 +41,8 @@ docker-compose up --build
 ```bash
 docker-compose down
 ```
+
+** Caso o projeto não seja executado com o docker, execute o comando
+```bash
+echo "JWT_KEY="$(openssl rand -hex 10) >> .env
+```

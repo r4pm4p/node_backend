@@ -1,4 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from "fastify"
+import Jwt from "../../application/Facades/Jwt"
 
 export default class Auth {
 
@@ -14,14 +15,22 @@ export default class Auth {
     }
 
     public static login = async (request: FastifyRequest, reply: FastifyReply) => {
-        
-        if (!request.headers['authorization'])
+        const token: string = request.headers.authorization?.split(" ")[1] as string
+
+        try {
+            if (!Jwt.validate(token))
+                return reply.code(401).send({
+                    "status": 401,
+                    "message": "must be logged to use this"
+                })
+
+            return true
+        } catch (e) {
             return reply.code(401).send({
                 "status": 401,
                 "message": "must be logged to use this"
             })
-
-        return true
+        }
     }
 
     public static owner = async (request: FastifyRequest, reply: FastifyReply) => {

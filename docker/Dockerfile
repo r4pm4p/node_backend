@@ -7,6 +7,8 @@ COPY ../package.json .
 
 RUN mv example.env .env
 
+RUN echo "JWT_KEY="$(openssl rand -hex 10) >> .env
+
 RUN npm update
 RUN npm install
 

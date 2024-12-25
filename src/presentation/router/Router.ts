@@ -14,7 +14,7 @@ export class Router {
       preHandler: [Auth.admin]
     }, new UserController().getAllUsers);
 
-    this.server.post("/register/user", { preHandler: Auth.login }, new UserController().registerNewUser);
+    this.server.post("/register/user", new UserController().registerNewUser);
 
     this.server.post("/register/mc", {
       preHandler: [Auth.login]
