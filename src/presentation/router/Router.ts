@@ -12,33 +12,68 @@ export class Router {
 
     this.server.get("/show/users/all", {
       preHandler: [Auth.admin]
-    }, new UserController().getAllUsers); // root
+    }, new UserController().getAllUsers);
 
-    this.server.post("/register/user", { preHandler: Auth.login }, new UserController().registerNewUser); // any
-    this.server.post("/register/mc", () => null); // user
-    this.server.post("/register/owner", () => null); // user 
+    this.server.post("/register/user", { preHandler: Auth.login }, new UserController().registerNewUser);
 
-    this.server.post("/confirm/presence/:eventId", () => null) // user
+    this.server.post("/register/mc", {
+      preHandler: [Auth.login]
+    }, () => null);
 
-    this.server.get("/show/all/battle", () => null); // user
-    this.server.get("/show/all/event", () => null); // user
+    this.server.post("/register/owner", {
+      preHandler: [Auth.login]
+    }, () => null);
 
-    this.server.post("/follow/mc/:mcId", () => null); // user
-    this.server.post("/follow/battle/:battleId", () => null); // user
+    this.server.post("/confirm/presence/:eventId", {
+    }, () => null)
 
-    this.server.post("/register/battle", () => null); //owner
-    this.server.post("/register/event", () => null); // owner
+    this.server.get("/show/all/battle", {
+    }, () => null);
+    this.server.get("/show/all/event", {
+    }, () => null);
 
-    this.server.post("/add/event/:eventId/podium", () => null); // owner
+    this.server.post("/follow/mc/:mcId", {
+      preHandler: [Auth.login]
+    }, () => null);
+    this.server.post("/follow/battle/:battleId", {
+      preHandler: [Auth.login]
+    }, () => null);
 
-    this.server.put("/update/battle/:battleId/profile", () => null); // owner
-    this.server.put("/update/event/:battleId/profile", () => null); // owner
+    this.server.post("/register/battle", {
+      preHandler: [Auth.owner]
+    }, () => null);
 
-    this.server.post("/participate/event/:eventId", () => null); // mc
-    this.server.put("/update/mc/:mcId/profile", () => null); // mc
+    this.server.post("/register/event", {
+      preHandler: [Auth.owner]
+    }, () => null);
 
-    this.server.post("/register/new/mob", () => null); // mc - owner mob
-    this.server.post("/add/mob/:mobId/mc", () => null); // mc - owner mob
+    this.server.post("/add/event/:eventId/podium", {
+      preHandler: [Auth.owner]
+    }, () => null);
+
+    this.server.put("/update/battle/:battleId/profile", {
+      preHandler: [Auth.owner]
+    }, () => null);
+
+    this.server.put("/update/event/:battleId/profile", {
+      preHandler: [Auth.owner]
+    }, () => null);
+
+    this.server.post("/participate/event/:eventId", {
+      preHandler: [Auth.mc]
+    }, () => null);
+
+    this.server.put("/update/mc/:mcId/profile", {
+      preHandler: [Auth.mc]
+    }, () => null);
+
+    this.server.post("/register/new/mob", {
+      preHandler: [Auth.mobowner]
+    }, () => null);
+
+    this.server.post("/add/mob/:mobId/mc", {
+      preHandler: [Auth.mobowner]
+    }, () => null);
 
 
   };

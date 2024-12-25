@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import LoginServices from "../../application/services/LoginServices";
 import { Controller } from "../interfaces/Controller";
+import Jwt from "../../application/Facades/Jwt";
 
 export default class LoginController implements Controller {
 
@@ -12,6 +13,7 @@ export default class LoginController implements Controller {
 
 
     public login = async (request: FastifyRequest, reply: FastifyReply) => {
+
         const data = request.body as any
 
         if (!await this.loginServices.auth(data.email, data.password))
@@ -20,10 +22,13 @@ export default class LoginController implements Controller {
                 "message": "User no Authorized"
             })
 
-        else
-            reply.code(200).send({
-                "status": 200,
-                "message": "Login confirmed"
-            })
+
+        return reply.code(200).send({
+            "status": 200,
+            "message": "Login confirmed",
+            "content": {
+                "token": Jwt.make(data.email)
+            }
+        })
     }
 }
