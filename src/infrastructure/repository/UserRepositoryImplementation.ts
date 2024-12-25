@@ -1,5 +1,6 @@
 import { User } from "../../domain/entities/User";
 import { ModelRepository } from "../../domain/repository/ModelRepository";
+import { LoginHistoryDTO } from "../DTO/LoginHistoryDTO";
 import { UserDTO } from "../DTO/UserDTO";
 
 export class UserRepositoryImplementation implements ModelRepository {
@@ -17,12 +18,13 @@ export class UserRepositoryImplementation implements ModelRepository {
   public findById = async (id: string): Promise<User> => {
     throw new Error("Method not implemented.");
   };
+
   public save = async (user: User): Promise<void> => {
 
     try {
 
       const userDTO = new UserDTO(user.toDTO())
-      userDTO.save();
+      await userDTO.save();
 
     } catch (e) {
       throw new Error("not implemented")
@@ -40,5 +42,15 @@ export class UserRepositoryImplementation implements ModelRepository {
 
   public delete = async (id: string): Promise<boolean> => {
     throw new Error("not suportesr");
+  }
+
+
+  public getLoginHistory = async (id: number) => {
+    return await UserDTO.findOne({
+      where: {
+        "id": id
+      },
+      include: LoginHistoryDTO,
+    });
   }
 }

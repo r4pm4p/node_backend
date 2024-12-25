@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
+import { LoginHistoryDTO } from './LoginHistoryDTO';
 
 
 class UserDTO extends Model { }
@@ -12,15 +13,15 @@ UserDTO.init(
             autoIncrement: true
         },
         name: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
         email: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
         password: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: false,
         },
     },
@@ -29,6 +30,12 @@ UserDTO.init(
         modelName: 'user',
     },
 );
+
+UserDTO.hasMany(LoginHistoryDTO, {
+    foreignKey: {
+        name: "user_id"
+    }
+})
 UserDTO.sync();
 
 export { UserDTO }

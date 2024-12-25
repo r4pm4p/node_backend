@@ -26,20 +26,25 @@ export class UserController implements Controller {
     reply: FastifyReply
   ) => {
 
-    const data = request.body as any;
+    try {
 
+      const data = request.body as any;
 
-    const user: User = new User(
-      data.id,
-      data.name,
-      data.email,
-      data.password
-    );
+      const user: User = new User(
+        data.id,
+        data.name,
+        data.email,
+        data.password
+      );
 
-    await this.userRepository.save(user)
-    return reply.code(200).send({
-      "code": 200,
-      "message": "Data is stored"
-    });
+      await this.userRepository.save(user)
+
+      return reply.send({
+        "code": 200,
+        "message": "Data is stored"
+      });
+    } catch (e) {
+      return reply.send(e)
+    }
   };
 }

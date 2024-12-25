@@ -2,6 +2,8 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import LoginServices from "../../application/services/LoginServices";
 import { Controller } from "../interfaces/Controller";
 import Jwt from "../../application/Facades/Jwt";
+import { LoginHistoryDTO } from "../../infrastructure/DTO/LoginHistoryDTO";
+import { UserDTO } from "../../infrastructure/DTO/UserDTO";
 
 export default class LoginController implements Controller {
 
@@ -23,6 +25,8 @@ export default class LoginController implements Controller {
             })
 
 
+        await this.loginServices.saveOnHistory();
+
         return reply.code(200).send({
             "status": 200,
             "message": "Login confirmed",
@@ -30,5 +34,23 @@ export default class LoginController implements Controller {
                 "token": Jwt.make(data.email)
             }
         })
+    }
+
+
+    public getUserLoginHistory = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const { id } = request.params as any
+
+            const userLoginHistory = await this.loginServices.getUserLoginHistory(id)
+
+            reply.code(200).send({
+                "status": 200,
+                "message": "Login history has been retrieved",
+                "content": userLoginHistory
+            })
+        } catch (error) {
+
+            reply.send(error)
+        }
     }
 }

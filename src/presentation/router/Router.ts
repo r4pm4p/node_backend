@@ -14,6 +14,10 @@ export class Router {
       preHandler: [Auth.admin]
     }, new UserController().getAllUsers);
 
+    this.server.get("/show/user/login/:id/history", {
+      preHandler: [Auth.admin],
+    }, new LoginController().getUserLoginHistory);
+
     this.server.post("/register/user", new UserController().registerNewUser);
 
     this.server.post("/register/mc", {
