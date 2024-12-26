@@ -1,5 +1,5 @@
-import { LoginHistoryDTO } from "../../infrastructure/DTO/LoginHistoryDTO";
-import { UserDTO } from "../../infrastructure/DTO/UserDTO"
+import { LoginHistoryDTO } from "../../infrastructure/dto/LoginHistoryDTO";
+import { UserDTO } from "../../infrastructure/dto/UserDTO"
 import { UserRepositoryImplementation } from "../../infrastructure/repository/UserRepositoryImplementation"
 import { Hash } from "../Facades/Hash"
 

@@ -1,7 +1,7 @@
 import { User } from "../../domain/entities/User";
 import { ModelRepository } from "../../domain/repository/ModelRepository";
-import { LoginHistoryDTO } from "../DTO/LoginHistoryDTO";
-import { UserDTO } from "../DTO/UserDTO";
+import { LoginHistoryDTO } from "../dto/LoginHistoryDTO";
+import { UserDTO } from "../dto/UserDTO";
 
 export class UserRepositoryImplementation implements ModelRepository {
   public findAll = async (): Promise<Array<any>> => {
