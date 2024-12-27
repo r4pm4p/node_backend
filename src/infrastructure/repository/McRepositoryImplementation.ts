@@ -9,12 +9,12 @@ export default class McRepositoryImplementation implements ModelRepository {
 
     public findById(id: string): Promise<any> {
         throw new Error("errr")
-
     }
 
     public async save(mc: Mc): Promise<void> {
-
         const mcDTO = new McDTO(mc.toDTO())
+        console.log(mcDTO);
+        
         await mcDTO.save()
 
     }

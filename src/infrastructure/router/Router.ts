@@ -23,7 +23,7 @@ export class Router {
 
     this.server.post("/register/mc", {
       preHandler: [Auth.login]
-    }, () => new McController().registerNewMc);
+    }, new McController().registerNewMc);
 
     this.server.post("/register/owner", {
       preHandler: [Auth.login]

@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
 import LoginHistoryDTO from './LoginHistoryDTO';
+import McDTO from './McDTO';
 
 
 class UserDTO extends Model { }
@@ -19,6 +20,7 @@ UserDTO.init(
         email: {
             type: DataTypes.STRING(100),
             allowNull: false,
+            unique: true
         },
         password: {
             type: DataTypes.STRING(100),
@@ -36,6 +38,12 @@ UserDTO.hasMany(LoginHistoryDTO, {
         name: "user_id"
     }
 })
+UserDTO.hasOne(McDTO, {
+    foreignKey: {
+        name: "user_id"
+    }
+})
+
 UserDTO.sync();
 
 export default UserDTO;

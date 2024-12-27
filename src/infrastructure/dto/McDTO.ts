@@ -15,15 +15,18 @@ McDTO.init({
         references: {
             model: "users",
             key: "id"
-        }
+        },
+        allowNull: false,
+        unique: true
     },
     streetname: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     address: {
         type: DataTypes.STRING(255),
-        allowNull: false
+        allowNull: true
     }
 }, {
     sequelize, modelName: "mc"

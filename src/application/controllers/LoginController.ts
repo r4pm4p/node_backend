@@ -1,6 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import LoginServices from "../../application/services/LoginServices";
-import Controller from "../interfaces/Controller";
 import Jwt from "../../application/Facades/Jwt";
 
 export default class LoginController {

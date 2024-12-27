@@ -1,11 +1,11 @@
 import EntitiesInterface from "../interfaces/EntitiesInterface";
 
 export default class Mc implements EntitiesInterface {
-  private userId: string;
+  private user_id: string;
   private streetname: string;
 
-  constructor(userId: string, streetname: string) {
-    this.userId = userId;
+  constructor(user_id: string, streetname: string) {
+    this.user_id = user_id;
     this.streetname = streetname;
   }
 
@@ -15,7 +15,7 @@ export default class Mc implements EntitiesInterface {
 
   public toDTO() {
     return {
-      userId: this.userId,
+      user_id: this.user_id,
       streetname: this.streetname
     }
   }

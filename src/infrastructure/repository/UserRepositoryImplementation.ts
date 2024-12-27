@@ -4,7 +4,7 @@ import LoginHistoryDTO from "../dto/LoginHistoryDTO";
 import UserDTO from "../dto/UserDTO";
 
 export default class UserRepositoryImplementation implements ModelRepository {
-  public findAll = async (): Promise<Array<any>> => {
+  public findAll = async (): Promise<Array<UserDTO>> => {
 
     try {
 
@@ -15,7 +15,7 @@ export default class UserRepositoryImplementation implements ModelRepository {
       throw new Error("Error on searching all registers")
     }
   }
-  public findById = async (id: string): Promise<User> => {
+  public findById = async (id: string): Promise<UserDTO> => {
     throw new Error("Method not implemented.");
   };
 

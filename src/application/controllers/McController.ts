@@ -12,14 +12,32 @@ export default class McController implements Controller {
         this.modelRepository = new McRepositoryImplementation()
     }
 
+    public getAllMcs = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const mcs = await this.modelRepository.findAll();
+
+            reply.code(200).send({
+                "status": 200,
+                "message": "User has turned to Mc",
+                "content": mcs
+            })
+        } catch (e) {
+            reply.send(e)
+        }
+    }
+
     public registerNewMc = async (request: FastifyRequest, reply: FastifyReply) => {
         try {
 
             const data = request.body as any
-            const mc = new Mc(data.id, data.streetname)
-
+            const mc = new Mc(data.user_id, data.streetname)
             await this.modelRepository.save(mc)
 
+            reply.code(200).send({
+                "status": 200,
+                "message": "User has turned to Mc",
+                "content": mc
+            })
         } catch (e) {
             reply.send(e)
         }

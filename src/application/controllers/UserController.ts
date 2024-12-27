@@ -2,9 +2,11 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import Controller from "../interfaces/Controller";
 import User from "../../domain/entities/User";
 import UserRepositoryImplementation from "../../infrastructure/repository/UserRepositoryImplementation";
+import ModelRepository from "../../domain/repository/ModelRepository";
 
 export default class UserController implements Controller {
-  modelRepository: UserRepositoryImplementation;
+
+  modelRepository: ModelRepository;
 
   constructor() {
     this.modelRepository = new UserRepositoryImplementation();
@@ -15,7 +17,7 @@ export default class UserController implements Controller {
     reply: FastifyReply
   ): Promise<FastifyReply> => {
 
-    const userData: Array<User> = await this.modelRepository.findAll();
+    const userData = await this.modelRepository.findAll();
 
     return reply.send(userData)
 
