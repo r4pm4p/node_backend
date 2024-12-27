@@ -1,7 +1,8 @@
-import { Hash } from "../../application/Facades/Hash";
+import Hash from "../../application/Facades/Hash";
+import EntitiesInterface from "../interfaces/EntitiesInterface";
 const crypto = require("crypto")
 
-export class User {
+export default class User implements EntitiesInterface {
   private id: string;
   private name: string;
   private email: string;

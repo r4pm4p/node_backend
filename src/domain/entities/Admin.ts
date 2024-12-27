@@ -1,4 +1,4 @@
-export class Admin {
+export default class Admin {
   private user_id: string;
 
   constructor(user_id: string) {

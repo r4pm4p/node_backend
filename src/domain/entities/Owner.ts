@@ -1,4 +1,4 @@
-export class Owner {
+export default class Owner {
   private userId: string;
 
   constructor(userId: string) {

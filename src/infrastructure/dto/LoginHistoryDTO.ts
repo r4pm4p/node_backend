@@ -22,4 +22,4 @@ LoginHistoryDTO.init({
 
 LoginHistoryDTO.sync()
 
-export { LoginHistoryDTO }
+export default LoginHistoryDTO

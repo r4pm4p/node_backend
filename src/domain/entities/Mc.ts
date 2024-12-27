@@ -1,4 +1,6 @@
-export class Mc {
+import EntitiesInterface from "../interfaces/EntitiesInterface";
+
+export default class Mc implements EntitiesInterface {
   private userId: string;
   private streetname: string;
 
@@ -10,4 +12,12 @@ export class Mc {
   protected changeStreetName(new_streetname: string) {
     this.streetname = new_streetname;
   }
+
+  public toDTO() {
+    return {
+      userId: this.userId,
+      streetname: this.streetname
+    }
+  }
+
 }

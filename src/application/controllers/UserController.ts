@@ -1,13 +1,13 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { Controller } from "../interfaces/Controller";
-import { User } from "../../domain/entities/User";
-import { UserRepositoryImplementation } from "../../infrastructure/repository/UserRepositoryImplementation";
+import Controller from "../interfaces/Controller";
+import User from "../../domain/entities/User";
+import UserRepositoryImplementation from "../../infrastructure/repository/UserRepositoryImplementation";
 
-export class UserController implements Controller {
-  private userRepository: UserRepositoryImplementation;
+export default class UserController implements Controller {
+  modelRepository: UserRepositoryImplementation;
 
   constructor() {
-    this.userRepository = new UserRepositoryImplementation();
+    this.modelRepository = new UserRepositoryImplementation();
   }
 
   public getAllUsers = async (
@@ -15,7 +15,7 @@ export class UserController implements Controller {
     reply: FastifyReply
   ): Promise<FastifyReply> => {
 
-    const userData: Array<User> = await this.userRepository.findAll();
+    const userData: Array<User> = await this.modelRepository.findAll();
 
     return reply.send(userData)
 
@@ -37,7 +37,7 @@ export class UserController implements Controller {
         data.password
       );
 
-      await this.userRepository.save(user)
+      await this.modelRepository.save(user)
 
       return reply.send({
         "code": 200,

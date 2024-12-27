@@ -1,6 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
-import { LoginHistoryDTO } from './LoginHistoryDTO';
+import LoginHistoryDTO from './LoginHistoryDTO';
 
 
 class UserDTO extends Model { }
@@ -38,4 +38,4 @@ UserDTO.hasMany(LoginHistoryDTO, {
 })
 UserDTO.sync();
 
-export { UserDTO }
+export default UserDTO;

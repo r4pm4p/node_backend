@@ -1,7 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { UserController } from "../../application/controllers/UserController";
+import UserController from "../../application/controllers/UserController";
 import LoginController from "../../application/controllers/LoginController";
 import Auth from "../../application/middleware/Auth";
+import McController from "../../application/controllers/McController";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -22,7 +23,7 @@ export class Router {
 
     this.server.post("/register/mc", {
       preHandler: [Auth.login]
-    }, () => null);
+    }, () => new McController().registerNewMc);
 
     this.server.post("/register/owner", {
       preHandler: [Auth.login]

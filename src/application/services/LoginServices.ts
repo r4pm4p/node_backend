@@ -1,7 +1,7 @@
-import { LoginHistoryDTO } from "../../infrastructure/dto/LoginHistoryDTO";
-import { UserDTO } from "../../infrastructure/dto/UserDTO"
-import { UserRepositoryImplementation } from "../../infrastructure/repository/UserRepositoryImplementation"
-import { Hash } from "../Facades/Hash"
+import LoginHistoryDTO from "../../infrastructure/dto/LoginHistoryDTO";
+import UserDTO from "../../infrastructure/dto/UserDTO"
+import UserRepositoryImplementation from "../../infrastructure/repository/UserRepositoryImplementation"
+import Hash from "../Facades/Hash"
 
 export default class LoginServices {
 
