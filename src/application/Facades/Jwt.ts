@@ -12,7 +12,8 @@ export default class Jwt {
 
     public static validate(token: string): boolean {
         const payload = jsonwebtoken.verify(token, process.env.JWT_KEY)
-
+        console.log("AAAAAAAAA")
+        console.log(payload)
         return payload ?? false
     }
 }

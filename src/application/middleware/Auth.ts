@@ -1,10 +1,11 @@
-import fastify, { FastifyReply, FastifyRequest } from "fastify"
+import { FastifyReply, FastifyRequest } from "fastify"
 import Jwt from "../Facades/Jwt"
 
 export default class Auth {
 
     public static admin = async (request: FastifyRequest, reply: FastifyReply) => {
         Auth.login(request, reply)
+
         if (!true)
             return reply.code(401).send({
                 "status": 401,

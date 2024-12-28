@@ -36,7 +36,7 @@ export default class UserRepositoryImplementation implements ModelRepository {
     return await UserDTO.findOne({
       where: {
         email: email
-      }
+      },
     })
   }
 

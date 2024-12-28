@@ -15,12 +15,13 @@ export default class LoginController {
 
         const data = request.body as any
 
-        if (!await this.loginServices.auth(data.email, data.password))
+        const authUser = await this.loginServices.auth(data.email, data.password)
+
+        if (!authUser)
             reply.code(401).send({
                 "status": 401,
-                "message": "User no Authorized"
+                "message": "User not Authorized"
             })
-
 
         await this.loginServices.saveOnHistory();
 
@@ -28,7 +29,7 @@ export default class LoginController {
             "status": 200,
             "message": "Login confirmed",
             "content": {
-                "token": Jwt.make(data.email)
+                "token": Jwt.make(authUser)
             }
         })
     }
