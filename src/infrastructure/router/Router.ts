@@ -3,13 +3,17 @@ import UserController from "../../application/controllers/UserController";
 import LoginController from "../../application/controllers/LoginController";
 import Auth from "../../application/middleware/Auth";
 import McController from "../../application/controllers/McController";
+import loginRequest from "../../application/request/loginRequest";
+import createMcRequest from "../../application/request/createMcRequest";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
 
   public start = () => {
 
-    this.server.post("/login", new LoginController().login);
+    this.server.post("/login", {
+      schema: loginRequest
+    }, new LoginController().login);
 
     this.server.get("/show/users/all", {
       preHandler: [Auth.admin]
@@ -22,7 +26,8 @@ export class Router {
     this.server.post("/register/user", new UserController().registerNewUser);
 
     this.server.post("/register/mc", {
-      preHandler: [Auth.login]
+      preHandler: [Auth.login],
+      schema: createMcRequest
     }, new McController().registerNewMc);
 
     this.server.post("/register/owner", {

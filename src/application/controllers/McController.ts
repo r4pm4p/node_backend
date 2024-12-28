@@ -30,7 +30,8 @@ export default class McController implements Controller {
         try {
 
             const data = request.body as any
-            const mc = new Mc(data.user_id, data.streetname)
+            const mc = new Mc(data.user_id, data.streetname, data.address)
+            
             await this.modelRepository.save(mc)
 
             reply.code(200).send({
