@@ -1,5 +1,5 @@
 import EntitiesInterface from "../interfaces/EntitiesInterface";
-import { Address } from "../value-objects/Address";
+import Address from "../value-objects/Address";
 
 export default class Mc implements EntitiesInterface {
 

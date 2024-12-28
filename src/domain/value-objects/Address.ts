@@ -1,4 +1,4 @@
-export class Address {
+export default class Address {
   private street: string;
   private number: string;
   private city: string;
