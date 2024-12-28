@@ -5,8 +5,10 @@ import Auth from "../../application/middleware/Auth";
 import McController from "../../application/controllers/McController";
 import loginRequest from "../../application/request/LoginRequest";
 import createMcRequest from "../../application/request/CreateMcRequest";
-import createOwnerRequest from "../../application/request/OwnerRequest";
+import createOwnerRequest from "../../application/request/CreateOwnerRequest";
 import OwnerController from "../../application/controllers/OwnerController";
+import AdminController from "../../application/controllers/AdminController";
+import createAdminRequest from "../../application/request/CreateAdminRequest";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -37,6 +39,16 @@ export class Router {
       schema: createOwnerRequest
     }, new OwnerController().registerNewOwner);
 
+    this.server.post("/register/admin", {
+      preHandler: [Auth.admin],
+      schema: createAdminRequest
+    }, new AdminController().registerNewAdmin);
+
+
+
+
+
+    
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)
 

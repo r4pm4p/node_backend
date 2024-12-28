@@ -18,7 +18,7 @@ export default class OwnerController implements Controller {
 
             reply.code(200).send({
                 "status": 200,
-                "message": "User has turned to Mc",
+                "message": "List of all owners",
                 "content": owners
             })
         } catch (e) {
