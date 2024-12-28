@@ -32,6 +32,4 @@ McDTO.init({
     sequelize, modelName: "mc"
 })
 
-McDTO.sync()
-
 export default McDTO;

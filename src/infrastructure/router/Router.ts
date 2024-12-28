@@ -3,8 +3,8 @@ import UserController from "../../application/controllers/UserController";
 import LoginController from "../../application/controllers/LoginController";
 import Auth from "../../application/middleware/Auth";
 import McController from "../../application/controllers/McController";
-import loginRequest from "../../application/request/loginRequest";
-import createMcRequest from "../../application/request/createMcRequest";
+import loginRequest from "../../application/request/LoginRequest";
+import createMcRequest from "../../application/request/CreateMcRequest";
 
 export class Router {
   constructor(private server: FastifyInstance) { }

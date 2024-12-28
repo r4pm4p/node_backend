@@ -12,9 +12,9 @@ export default class McRepositoryImplementation implements ModelRepository {
     }
 
     public async save(mc: Mc): Promise<void> {
-        
+
         const mcDTO = new McDTO(mc.toDTO())
-        
+
         await mcDTO.save()
 
     }

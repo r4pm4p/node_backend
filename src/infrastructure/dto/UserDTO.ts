@@ -44,6 +44,4 @@ UserDTO.hasOne(McDTO, {
     }
 })
 
-UserDTO.sync();
-
 export default UserDTO;

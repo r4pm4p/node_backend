@@ -20,6 +20,4 @@ LoginHistoryDTO.init({
 }, { sequelize, modelName: 'login' })
 
 
-LoginHistoryDTO.sync()
-
 export default LoginHistoryDTO
