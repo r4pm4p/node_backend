@@ -45,10 +45,10 @@ export class Router {
     }, new AdminController().registerNewAdmin);
 
 
+    // DIVIDER
 
 
 
-    
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)
 
