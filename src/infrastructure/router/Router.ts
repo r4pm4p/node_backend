@@ -5,6 +5,8 @@ import Auth from "../../application/middleware/Auth";
 import McController from "../../application/controllers/McController";
 import loginRequest from "../../application/request/LoginRequest";
 import createMcRequest from "../../application/request/CreateMcRequest";
+import createOwnerRequest from "../../application/request/OwnerRequest";
+import OwnerController from "../../application/controllers/OwnerController";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -31,8 +33,9 @@ export class Router {
     }, new McController().registerNewMc);
 
     this.server.post("/register/owner", {
-      preHandler: [Auth.login]
-    }, () => null);
+      preHandler: [Auth.login],
+      schema: createOwnerRequest
+    }, new OwnerController().registerNewOwner);
 
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)

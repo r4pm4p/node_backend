@@ -1,8 +1,8 @@
-import Mc from "../../domain/entities/Mc";
+import Owner from "../../domain/entities/Owner";
 import ModelRepository from "../../domain/repository/ModelRepository";
-import McDTO from "../dto/McDTO";
+import OwnerDTO from "../dto/OwnerDTO";
 
-export default class McRepositoryImplementation implements ModelRepository {
+export default class OwnerRepositoryImplementation implements ModelRepository {
     public findAll(): Promise<Array<any>> {
         throw new Error("errr")
     }
@@ -11,11 +11,11 @@ export default class McRepositoryImplementation implements ModelRepository {
         throw new Error("errr")
     }
 
-    public async save(mc: Mc): Promise<void> {
+    public async save(owner: Owner): Promise<void> {
 
-        const mcDTO = new McDTO(mc.toDTO())
+        const ownerDTO = new OwnerDTO(owner.toDTO())
 
-        await mcDTO.save()
+        await ownerDTO.save()
     }
 
     public async delete(id: string): Promise<boolean> {

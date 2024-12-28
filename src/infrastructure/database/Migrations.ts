@@ -1,5 +1,6 @@
 import LoginHistoryDTO from "../dto/LoginHistoryDTO";
 import McDTO from "../dto/McDTO";
+import OwnerDTO from "../dto/OwnerDTO";
 import UserDTO from "../dto/UserDTO";
 
 export default class Migration {
@@ -7,5 +8,6 @@ export default class Migration {
         UserDTO.sync();
         McDTO.sync()
         LoginHistoryDTO.sync()
+        OwnerDTO.sync()
     }
 }
