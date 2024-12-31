@@ -1,7 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
-import LoginHistoryDTO from './LoginHistoryDTO';
-import McDTO from './McDTO';
+import OwnerDTO from './OwnerDTO';
 
 
 class BattleDTO extends Model { }
@@ -31,7 +30,7 @@ BattleDTO.init(
             references: {
                 model: 'owners',
                 key: 'id'
-            },    
+            },
         },
     },
     {
@@ -39,5 +38,11 @@ BattleDTO.init(
         modelName: 'battle',
     },
 );
+
+BattleDTO.hasOne(OwnerDTO, {
+    foreignKey: {
+        name: "id"
+    }
+})
 
 export default BattleDTO;
