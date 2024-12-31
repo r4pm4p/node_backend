@@ -9,6 +9,8 @@ import createOwnerRequest from "../../application/request/CreateOwnerRequest";
 import OwnerController from "../../application/controllers/OwnerController";
 import AdminController from "../../application/controllers/AdminController";
 import createAdminRequest from "../../application/request/CreateAdminRequest";
+import createBattleRequest from "../../application/request/CreateBattleRequets";
+import BattleController from "../../application/controllers/BattleController";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -44,9 +46,12 @@ export class Router {
       schema: createAdminRequest
     }, new AdminController().registerNewAdmin);
 
+    this.server.post("/register/battle", {
+      preHandler: [Auth.owner],
+      schema: createBattleRequest
+    }, new BattleController().registerNewBattle);
 
     // DIVIDER
-
 
 
     this.server.post("/confirm/presence/:eventId", {
@@ -62,10 +67,6 @@ export class Router {
     }, () => null);
     this.server.post("/follow/battle/:battleId", {
       preHandler: [Auth.login]
-    }, () => null);
-
-    this.server.post("/register/battle", {
-      preHandler: [Auth.owner]
     }, () => null);
 
     this.server.post("/register/event", {
