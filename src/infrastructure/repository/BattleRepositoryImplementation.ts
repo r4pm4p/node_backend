@@ -1,13 +1,16 @@
 import ModelRepository from "../../domain/repository/ModelRepository";
 import Battle from "../../domain/entities/Battle";
 import BattleDTO from "../dto/BattleDTO";
+import OwnerDTO from "../dto/OwnerDTO";
 
 export default class BattleRepositoryImplementation implements ModelRepository {
     public findAll = async (): Promise<Array<BattleDTO>> => {
 
         try {
 
-            const data: Array<BattleDTO> = await BattleDTO.findAll();
+            const data: Array<BattleDTO> = await BattleDTO.findAll({
+                include: OwnerDTO
+            });
             return data;
 
         } catch (e) {

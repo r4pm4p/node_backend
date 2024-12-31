@@ -27,6 +27,7 @@ BattleDTO.init(
         owner_id: {
             type: DataTypes.STRING(100),
             allowNull: false,
+            unique: true,
             references: {
                 model: 'owners',
                 key: 'id'
