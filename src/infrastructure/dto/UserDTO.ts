@@ -33,15 +33,5 @@ UserDTO.init(
     },
 );
 
-UserDTO.hasMany(LoginHistoryDTO, {
-    foreignKey: {
-        name: "user_id"
-    }
-})
-UserDTO.hasOne(McDTO, {
-    foreignKey: {
-        name: "user_id"
-    }
-})
 
 export default UserDTO;

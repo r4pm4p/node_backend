@@ -11,6 +11,8 @@ import AdminController from "../../application/controllers/AdminController";
 import createAdminRequest from "../../application/request/CreateAdminRequest";
 import createBattleRequest from "../../application/request/CreateBattleRequets";
 import BattleController from "../../application/controllers/BattleController";
+import EventController from "../../application/controllers/EventController";
+import createEventRequest from "../../application/request/CreateEventRequest";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -54,24 +56,26 @@ export class Router {
     this.server.get("/show/all/battle", {
     }, new BattleController().getAllBattles);
 
+    this.server.post("/register/event", {
+      preHandler: [Auth.owner],
+      schema: createEventRequest
+    }, new EventController().registerNewEvent);
+
+    this.server.get("/show/all/event", {
+      preHandler: [Auth.login]
+    }, new EventController().getAllEvents);
+
     // DIVIDER
 
 
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)
 
-    this.server.get("/show/all/event", {
-    }, () => null);
-
     this.server.post("/follow/mc/:mcId", {
       preHandler: [Auth.login]
     }, () => null);
     this.server.post("/follow/battle/:battleId", {
       preHandler: [Auth.login]
-    }, () => null);
-
-    this.server.post("/register/event", {
-      preHandler: [Auth.owner]
     }, () => null);
 
     this.server.post("/add/event/:eventId/podium", {

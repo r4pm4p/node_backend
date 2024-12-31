@@ -1,11 +1,11 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
-import OwnerDTO from './OwnerDTO';
+import BattleDTO from './BattleDTO';
 
 
-class BattleDTO extends Model { }
+class EventDTO extends Model { }
 
-BattleDTO.init(
+EventDTO.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -16,29 +16,24 @@ BattleDTO.init(
             type: DataTypes.STRING(100),
             allowNull: false,
         },
-        address: {
-            type: DataTypes.STRING(255),
-            allowNull: true
-        },
-        map_position: {
-            type: DataTypes.STRING(50),
+        date: {
+            type: DataTypes.DATE,
             allowNull: false
         },
-        owner_id: {
+        battle_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            unique: true,
             references: {
-                model: 'owners',
+                model: 'battles',
                 key: 'id'
             },
         },
     },
     {
         sequelize,
-        modelName: 'battle',
+        modelName: 'event',
     },
 );
 
 
-export default BattleDTO;
+export default EventDTO;
