@@ -25,7 +25,7 @@ BattleDTO.init(
             allowNull: false
         },
         owner_id: {
-            type: DataTypes.STRING(100),
+            type: DataTypes.INTEGER,
             allowNull: false,
             unique: true,
             references: {
