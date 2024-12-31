@@ -51,14 +51,15 @@ export class Router {
       schema: createBattleRequest
     }, new BattleController().registerNewBattle);
 
+    this.server.get("/show/all/battle", {
+    }, new BattleController().getAllBattles);
+
     // DIVIDER
 
 
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)
 
-    this.server.get("/show/all/battle", {
-    }, () => null);
     this.server.get("/show/all/event", {
     }, () => null);
 

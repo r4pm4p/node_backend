@@ -17,9 +17,19 @@ export default class BattleController implements Controller {
         reply: FastifyReply
     ): Promise<FastifyReply> => {
 
-        const battleData = await this.modelRepository.findAll();
+        try {
 
-        return reply.send(battleData)
+            const battleData = await this.modelRepository.findAll();
+
+            return reply.send({
+                "status": 200,
+                "message": "Battle data retrieved with success",
+                "content": battleData
+            })
+
+        } catch (e) {
+            return reply.send(e)
+        }
 
     };
 
