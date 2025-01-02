@@ -1,5 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import Jwt from "../Facades/Jwt"
+import Session from "../Facades/Session"
 
 export default class Auth {
 
@@ -18,13 +19,16 @@ export default class Auth {
     public static login = async (request: FastifyRequest, reply: FastifyReply) => {
         const token: string = request.headers.authorization?.split(" ")[1] as string
 
+        const payload: any = Jwt.validate(token)
+
         try {
-            if (!Jwt.validate(token))
+            if (!payload)
                 return reply.code(401).send({
                     "status": 401,
-                    "message": "must be logged to use this"
+                    "message": "musts be logged to use this"
                 })
 
+            Session.setUser(payload.user)
             return true
         } catch (e) {
             return reply.code(401).send({

@@ -1,16 +1,12 @@
 export default class Session {
 
-    private id: number;
+    static user: any;
 
-    constructor(id: number) {
-        this.id = id
+    public static setUser = (user: any) => {
+        Session.user = user
     }
 
-    public setGlobalId = (id: number) => {
-        this.id = id
-    }
-
-    public getGlobalId = (id: number) => {
-        return this.id
+    public static getUser = () => {
+        return Session.user
     }
 }
