@@ -1,5 +1,6 @@
 import Presence from "../../domain/entities/Presence";
 import ModelRepository from "../../domain/repository/ModelRepository";
+import McPresencelistDTO from "../dto/McPresencelistDTO";
 import WatchlistDTO from "../dto/WatchlistDTO";
 
 export default class PresenceRepositoryImplementation implements ModelRepository {
@@ -16,8 +17,7 @@ export default class PresenceRepositoryImplementation implements ModelRepository
             if (presence.getType() == "watch") {
                 var presenceDTO = new WatchlistDTO(presence.toDTO());
             } else {
-                // alterar
-                var presenceDTO = new WatchlistDTO(presence.toDTO());
+                var presenceDTO = new McPresencelistDTO(presence.toDTO());
             }
 
             await presenceDTO.save();

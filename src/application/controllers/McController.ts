@@ -3,6 +3,8 @@ import Controller from "../interfaces/Controller";
 import Mc from "../../domain/entities/Mc";
 import McRepositoryImplementation from "../../infrastructure/repository/McRepositoryImplementation";
 import ModelRepository from "../../domain/repository/ModelRepository";
+import Presence from "../../domain/entities/Presence";
+import PresenceRepositoryImplementation from "../../infrastructure/repository/PresenceRepositoryImplementation";
 
 export default class McController implements Controller {
 
@@ -43,6 +45,18 @@ export default class McController implements Controller {
             reply.send(e)
         }
 
+    }
+
+    public askPresenceOnEvent = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const presenceRepository = new PresenceRepositoryImplementation();
+            //@ts-expect-error
+            const presence = new Presence(request.body.mc_id, request.params.eventId, "mc")
+            await presenceRepository.save(presence)
+
+        } catch (e) {
+            return reply.send(e)
+        }
     }
 
 }

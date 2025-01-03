@@ -3,6 +3,7 @@ import Jwt from "../Facades/Jwt"
 import Session from "../Facades/Session"
 import AdminDTO from "../../infrastructure/dto/AdminDTO"
 import { isSet } from "util/types"
+import McDTO from "../../infrastructure/dto/McDTO"
 
 export default class Auth {
 
@@ -41,7 +42,7 @@ export default class Auth {
             if (admin) {
                 Session.setAdminSession()
             }
-            
+
             return true
         } catch (e) {
             return reply.code(401).send({
@@ -63,15 +64,21 @@ export default class Auth {
     }
 
     public static mc = async (request: FastifyRequest, reply: FastifyReply) => {
+        await Auth.login(request, reply)
 
-        Auth.login(request, reply)
+        const mc = await McDTO.findOne({
+            where: {
+                user_id: Session.getUser().id
+            }
+        })
 
-        if (!true)
+        if (!mc)
             return reply.code(401).send({
                 "status": 401,
                 "message": "must be logged to use this"
             })
 
+        Session.setMc(mc)
         return true
     }
 

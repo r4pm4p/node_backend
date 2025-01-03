@@ -78,6 +78,10 @@ export class Router {
       preHandler: [Auth.login]
     }, new EventController().userConfirmPresence)
 
+    this.server.post("/presence/event/:eventId", {
+      preHandler: [Auth.mc]
+    }, new McController().askPresenceOnEvent);
+
     // DIVIDER
 
     this.server.post("/add/event/:eventId/podium", {
@@ -92,20 +96,8 @@ export class Router {
       preHandler: [Auth.owner]
     }, () => null);
 
-    this.server.post("/participate/event/:eventId", {
-      preHandler: [Auth.mc]
-    }, () => null);
-
     this.server.put("/update/mc/:mcId/profile", {
       preHandler: [Auth.mc]
-    }, () => null);
-
-    this.server.post("/register/new/mob", {
-      preHandler: [Auth.mobowner]
-    }, () => null);
-
-    this.server.post("/add/mob/:mobId/mc", {
-      preHandler: [Auth.mobowner]
     }, () => null);
 
 

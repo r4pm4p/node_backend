@@ -5,6 +5,7 @@ import EventDTO from "../dto/EventDTO";
 import LoginHistoryDTO from "../dto/LoginHistoryDTO";
 import McDTO from "../dto/McDTO";
 import McFollowersDTO from "../dto/McFollowersDTO";
+import McPresencelistDTO from "../dto/McPresencelistDTO";
 import OwnerDTO from "../dto/OwnerDTO";
 import UserDTO from "../dto/UserDTO";
 import WatchlistDTO from "../dto/WatchlistDTO";
@@ -22,6 +23,7 @@ export default class Migration {
         McFollowersDTO.sync();
         BattleFollowersDTO.sync();
         WatchlistDTO.sync();
+        McPresencelistDTO.sync()
 
         Migration.relationship()
     }
@@ -57,6 +59,7 @@ export default class Migration {
                 name: "battle_id"
             }
         })
+
     }
 
 }

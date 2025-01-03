@@ -3,6 +3,7 @@ import AdminDTO from "../../infrastructure/dto/AdminDTO";
 export default class Session {
 
     static user: any;
+    static mc: any;
     static isAdmin: boolean = false;
 
     public static setUser = (user: any) => {
@@ -18,5 +19,13 @@ export default class Session {
     }
     public static isAdminSession = () => {
         return Session.isAdmin
+    }
+
+    public static getMc = () => {
+        return Session.mc ?? false
+    }
+
+    public static setMc = (mc: any) => {
+        Session.mc = mc
     }
 }
