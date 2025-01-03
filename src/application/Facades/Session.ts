@@ -4,6 +4,7 @@ export default class Session {
 
     static user: any;
     static mc: any;
+    static owner: any;
     static isAdmin: boolean = false;
 
     public static setUser = (user: any) => {
@@ -27,5 +28,13 @@ export default class Session {
 
     public static setMc = (mc: any) => {
         Session.mc = mc
+    }
+
+    public static setOwner = () => {
+        return Session.owner ?? false
+    }
+
+    public static getOwner = (owner: any) => {
+        Session.owner = owner
     }
 }

@@ -4,6 +4,7 @@ import Session from "../Facades/Session"
 import AdminDTO from "../../infrastructure/dto/AdminDTO"
 import { isSet } from "util/types"
 import McDTO from "../../infrastructure/dto/McDTO"
+import OwnerDTO from "../../infrastructure/dto/OwnerDTO"
 
 export default class Auth {
 
@@ -53,13 +54,21 @@ export default class Auth {
     }
 
     public static owner = async (request: FastifyRequest, reply: FastifyReply) => {
-        Auth.login(request, reply)
-        if (!true)
+        await Auth.login(request, reply)
+
+        const owner = await OwnerDTO.findOne({
+            where: {
+                user_id: Session.getUser().id
+            }
+        })
+
+        if (!owner)
             return reply.code(401).send({
                 "status": 401,
                 "message": "User has no privileges to this route"
             })
 
+        Session.setMc(owner)
         return true
     }
 

@@ -3,6 +3,8 @@ import Controller from "../interfaces/Controller";
 import ModelRepository from "../../domain/repository/ModelRepository";
 import Owner from "../../domain/entities/Owner";
 import OwnerRepositoryImplementation from "../../infrastructure/repository/OwnerRepositoryImplementation";
+import PresenceRepositoryImplementation from "../../infrastructure/repository/PresenceRepositoryImplementation";
+import Presence from "../../domain/entities/Presence";
 
 export default class OwnerController implements Controller {
 
@@ -43,6 +45,23 @@ export default class OwnerController implements Controller {
             reply.send(e)
         }
 
+    }
+
+    public confirmMcPresence = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const presenceRepository = new PresenceRepositoryImplementation();
+            //@ts-expect-error
+            const presence = new Presence(request.body.mc_id, request.params.eventId, "mc");
+
+            await presenceRepository.changePresenceStatus(presence);
+
+            return reply.send({
+                "status": 200,
+                "message": "Mc is confirmed"
+            })
+        } catch (e) {
+            reply.send(e)
+        }
     }
 
 }

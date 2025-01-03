@@ -82,6 +82,11 @@ export class Router {
       preHandler: [Auth.mc]
     }, new McController().askPresenceOnEvent);
 
+    this.server.post("/presence/confirm/:eventId", {
+      preHandler: [Auth.owner]
+    }, new OwnerController().confirmMcPresence);
+
+
     // DIVIDER
 
     this.server.post("/add/event/:eventId/podium", {

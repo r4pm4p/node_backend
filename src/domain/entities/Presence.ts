@@ -16,6 +16,14 @@ export default class Presence implements EntitiesInterface {
         return this.type;
     }
 
+    public getMc = () => {
+        return this.type != "watch" ? this.toConfirm_id : false
+    }
+
+    public getEvent = () => {
+        return this.event_id
+    }
+
     public toDTO() {
         if (this.type == "watch") {
             return {
