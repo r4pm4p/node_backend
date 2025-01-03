@@ -86,6 +86,9 @@ export class Router {
       preHandler: [Auth.owner]
     }, new OwnerController().confirmMcPresence);
 
+    this.server.get("/presence/mc/:eventId", {
+      preHandler: [Auth.owner]
+    }, new OwnerController().getAllPresenceRequest);
 
     // DIVIDER
 

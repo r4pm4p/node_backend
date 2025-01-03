@@ -8,6 +8,23 @@ export default class PresenceRepositoryImplementation implements ModelRepository
         throw new Error("errr")
     }
 
+    public async findAllMcsRequest(eventId: number) {
+        try {
+            const mcsRequestDTO = await McPresencelistDTO.findAll({
+                where: {
+                    event_id: eventId
+                },
+                order: [
+                    ['is_approved', 'ASC']
+                ]
+            })
+
+            return mcsRequestDTO
+        } catch (e) {
+            throw e
+        }
+    }
+
     public findById(id: string): Promise<any> {
         throw new Error("errr")
     }

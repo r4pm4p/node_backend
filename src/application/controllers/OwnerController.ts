@@ -60,7 +60,25 @@ export default class OwnerController implements Controller {
                 "message": "Mc is confirmed"
             })
         } catch (e) {
-            reply.send(e)
+            return reply.send(e)
+        }
+    }
+
+
+    public getAllPresenceRequest = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+
+            const presenceRepository = new PresenceRepositoryImplementation();
+            //@ts-expect-error
+            const mcsRequest = await presenceRepository.findAllMcsRequest(request.params.eventId);
+
+            return reply.send({
+                "status": 200,
+                "message": "Mcs request founded",
+                "content": mcsRequest
+            })
+        } catch (e) {
+            return reply.send(e)
         }
     }
 
