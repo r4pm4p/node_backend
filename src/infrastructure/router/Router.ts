@@ -13,6 +13,7 @@ import createBattleRequest from "../../application/request/CreateBattleRequets";
 import BattleController from "../../application/controllers/BattleController";
 import EventController from "../../application/controllers/EventController";
 import createEventRequest from "../../application/request/CreateEventRequest";
+import FollowersController from "../../application/controllers/FollowersController";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -65,18 +66,18 @@ export class Router {
       preHandler: [Auth.login]
     }, new EventController().getAllEvents);
 
-    // DIVIDER
+    this.server.post("/follow/mc/:mcId", {
+      preHandler: [Auth.login]
+    }, new FollowersController().followMc);
 
+    this.server.post("/follow/battle/:battleId", {
+      preHandler: [Auth.login]
+    }, new FollowersController().followBattle);
+
+    // DIVIDER
 
     this.server.post("/confirm/presence/:eventId", {
     }, () => null)
-
-    this.server.post("/follow/mc/:mcId", {
-      preHandler: [Auth.login]
-    }, () => null);
-    this.server.post("/follow/battle/:battleId", {
-      preHandler: [Auth.login]
-    }, () => null);
 
     this.server.post("/add/event/:eventId/podium", {
       preHandler: [Auth.owner]

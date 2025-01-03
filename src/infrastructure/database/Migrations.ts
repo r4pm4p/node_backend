@@ -1,8 +1,10 @@
 import AdminDTO from "../dto/AdminDTO";
 import BattleDTO from "../dto/BattleDTO";
+import BattleFollowers from "../dto/BattleFollowers";
 import EventDTO from "../dto/EventDTO";
 import LoginHistoryDTO from "../dto/LoginHistoryDTO";
 import McDTO from "../dto/McDTO";
+import McFollowers from "../dto/McFollowers";
 import OwnerDTO from "../dto/OwnerDTO";
 import UserDTO from "../dto/UserDTO";
 
@@ -16,6 +18,8 @@ export default class Migration {
         AdminDTO.sync();
         BattleDTO.sync();
         EventDTO.sync();
+        McFollowers.sync();
+        BattleFollowers.sync();
 
         Migration.relationship()
     }
