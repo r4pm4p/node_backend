@@ -1,4 +1,3 @@
-import { where } from "sequelize";
 import Presence from "../../domain/entities/Presence";
 import ModelRepository from "../../domain/repository/ModelRepository";
 import McPresencelistDTO from "../dto/McPresencelistDTO";
@@ -13,10 +12,10 @@ export default class PresenceRepositoryImplementation implements ModelRepository
         throw new Error("errr")
     }
 
-    public async changePresenceStatus(presence: Presence) {
+    public async changePresenceStatus(presence: Presence, status: boolean) {
         try {
             await McPresencelistDTO.update({
-                is_approved: true
+                is_approved: status
             }, {
                 where: {
                     mc_id: presence.getMc(),

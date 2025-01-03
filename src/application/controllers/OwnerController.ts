@@ -53,7 +53,7 @@ export default class OwnerController implements Controller {
             //@ts-expect-error
             const presence = new Presence(request.body.mc_id, request.params.eventId, "mc");
 
-            await presenceRepository.changePresenceStatus(presence);
+            await presenceRepository.changePresenceStatus(presence, true);
 
             return reply.send({
                 "status": 200,
