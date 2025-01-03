@@ -1,13 +1,15 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import Jwt from "../Facades/Jwt"
 import Session from "../Facades/Session"
+import AdminDTO from "../../infrastructure/dto/AdminDTO"
+import { isSet } from "util/types"
 
 export default class Auth {
 
     public static admin = async (request: FastifyRequest, reply: FastifyReply) => {
         Auth.login(request, reply)
 
-        if (!true)
+        if (!Session.isAdminSession())
             return reply.code(401).send({
                 "status": 401,
                 "message": "User has no privileges to this route"
@@ -21,6 +23,12 @@ export default class Auth {
 
         const payload: any = Jwt.validate(token)
 
+        const admin = await AdminDTO.findOne({
+            where: {
+                user_id: payload.user.id
+            }
+        })
+
         try {
             if (!payload)
                 return reply.code(401).send({
@@ -29,6 +37,11 @@ export default class Auth {
                 })
 
             Session.setUser(payload.user)
+
+            if (admin) {
+                Session.setAdminSession()
+            }
+            
             return true
         } catch (e) {
             return reply.code(401).send({
