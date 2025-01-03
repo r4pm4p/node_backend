@@ -74,10 +74,11 @@ export class Router {
       preHandler: [Auth.login]
     }, new FollowersController().followBattle);
 
-    // DIVIDER
-
     this.server.post("/confirm/presence/:eventId", {
-    }, () => null)
+      preHandler: [Auth.login]
+    }, new EventController().userConfirmPresence)
+
+    // DIVIDER
 
     this.server.post("/add/event/:eventId/podium", {
       preHandler: [Auth.owner]

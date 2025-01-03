@@ -5,6 +5,9 @@ import BattleRepositoryImplementation from "../../infrastructure/repository/Batt
 import Battle from "../../domain/entities/Battle";
 import EventRepositoryImplementation from "../../infrastructure/repository/EventRepositoryImplementation";
 import Event from "../../domain/entities/Event";
+import PresenceRepositoryImplementation from "../../infrastructure/repository/PresenceRepositoryImplementation";
+import Presence from "../../domain/entities/Presence";
+import Session from "../Facades/Session";
 
 export default class EventController implements Controller {
 
@@ -60,4 +63,23 @@ export default class EventController implements Controller {
             return reply.send(e)
         }
     };
+
+
+    public userConfirmPresence = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+
+            const presenceRepository = new PresenceRepositoryImplementation();
+            //@ts-expect-error
+            const presence = new Presence(Session.getUser().id, request.params.eventId, "watch");
+            await presenceRepository.save(presence)
+
+            return reply.send({
+                "code": 200,
+                "message": "User has confirmed presence"
+            })
+        } catch (e) {
+            return reply.send(e)
+        }
+    }
+
 }
