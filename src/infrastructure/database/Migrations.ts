@@ -1,10 +1,10 @@
 import AdminDTO from "../dto/AdminDTO";
 import BattleDTO from "../dto/BattleDTO";
-import BattleFollowers from "../dto/BattleFollowers";
+import BattleFollowers from "../dto/BattleFollowersDTO";
 import EventDTO from "../dto/EventDTO";
 import LoginHistoryDTO from "../dto/LoginHistoryDTO";
 import McDTO from "../dto/McDTO";
-import McFollowers from "../dto/McFollowers";
+import McFollowers from "../dto/McFollowersDTO";
 import OwnerDTO from "../dto/OwnerDTO";
 import UserDTO from "../dto/UserDTO";
 

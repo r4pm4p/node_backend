@@ -1,7 +1,7 @@
 import Follower from "../../domain/entities/Follower";
 import ModelRepository from "../../domain/repository/ModelRepository";
-import BattleFollowers from "../dto/BattleFollowers";
-import McFollowers from "../dto/McFollowers";
+import BattleFollowers from "../dto/BattleFollowersDTO";
+import McFollowers from "../dto/McFollowersDTO";
 
 export default class FollowersRepositoryImplementation implements ModelRepository {
     public findAll(): Promise<Array<any>> {
