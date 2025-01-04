@@ -7,6 +7,7 @@ import McDTO from "../dto/McDTO";
 import McFollowersDTO from "../dto/McFollowersDTO";
 import McPresencelistDTO from "../dto/McPresencelistDTO";
 import OwnerDTO from "../dto/OwnerDTO";
+import PodiumDTO from "../dto/PodiumDTO";
 import UserDTO from "../dto/UserDTO";
 import WatchlistDTO from "../dto/WatchlistDTO";
 
@@ -24,6 +25,7 @@ export default class Migration {
         BattleFollowersDTO.sync();
         WatchlistDTO.sync();
         McPresencelistDTO.sync()
+        PodiumDTO.sync()
 
         Migration.relationship()
     }

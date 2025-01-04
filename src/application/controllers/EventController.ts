@@ -8,6 +8,8 @@ import Event from "../../domain/entities/Event";
 import PresenceRepositoryImplementation from "../../infrastructure/repository/PresenceRepositoryImplementation";
 import Presence from "../../domain/entities/Presence";
 import Session from "../Facades/Session";
+import PodiumRepositoryImplementation from "../../infrastructure/repository/PodiumRepositoryImplementation";
+import Podium from "../../domain/entities/Podium";
 
 export default class EventController implements Controller {
 
@@ -76,6 +78,24 @@ export default class EventController implements Controller {
             return reply.send({
                 "code": 200,
                 "message": "User has confirmed presence"
+            })
+        } catch (e) {
+            return reply.send(e)
+        }
+    }
+
+    public addPodiumToEvent = async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+
+            const podiumRepository = new PodiumRepositoryImplementation();
+            //@ts-expect-error
+            const podium = new Podium(request.params.eventId, request.body.fst_place_id, request.body.scd_place_id, request.body.thd_place_id)
+
+            await podiumRepository.save(podium)
+
+            return reply.send({
+                "status": 200,
+                "message": "Podium has been added",
             })
         } catch (e) {
             return reply.send(e)

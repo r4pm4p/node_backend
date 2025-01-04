@@ -14,6 +14,7 @@ import BattleController from "../../application/controllers/BattleController";
 import EventController from "../../application/controllers/EventController";
 import createEventRequest from "../../application/request/CreateEventRequest";
 import FollowersController from "../../application/controllers/FollowersController";
+import addPodiumRequest from "../../application/request/AddPodiumRequest";
 
 export class Router {
   constructor(private server: FastifyInstance) { }
@@ -90,11 +91,12 @@ export class Router {
       preHandler: [Auth.owner]
     }, new OwnerController().getAllPresenceRequest);
 
-    // DIVIDER
-
     this.server.post("/add/event/:eventId/podium", {
-      preHandler: [Auth.owner]
-    }, () => null);
+      preHandler: [Auth.owner],
+      schema: addPodiumRequest
+    }, new EventController().addPodiumToEvent);
+
+    // DIVIDER
 
     this.server.put("/update/battle/:battleId/profile", {
       preHandler: [Auth.owner]
