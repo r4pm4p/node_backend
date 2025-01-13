@@ -1,4 +1,5 @@
 import { FastifyInstance } from "fastify";
+import fastifyCors from "@fastify/cors";
 import UserController from "../../application/controllers/UserController";
 import LoginController from "../../application/controllers/LoginController";
 import Auth from "../../application/middleware/Auth";
@@ -17,7 +18,9 @@ import FollowersController from "../../application/controllers/FollowersControll
 import addPodiumRequest from "../../application/request/AddPodiumRequest";
 
 export class Router {
-  constructor(private server: FastifyInstance) { }
+  constructor(private server: FastifyInstance) { 
+    server.register(fastifyCors, {})
+  }
 
   public start = () => {
 

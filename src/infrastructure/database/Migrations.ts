@@ -27,7 +27,7 @@ export default class Migration {
         McPresencelistDTO.sync()
         PodiumDTO.sync()
 
-        Migration.relationship()
+        // Migration.relationship()
     }
 
 
