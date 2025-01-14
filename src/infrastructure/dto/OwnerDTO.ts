@@ -1,6 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from '../database/Connection';
-import BattleDTO from './BattleDTO';
 
 
 class OwnerDTO extends Model { }
@@ -20,6 +19,12 @@ OwnerDTO.init(
             },
             allowNull: false,
             unique: true
+        },
+        is_approved: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            unique: true,
+            defaultValue: false
         },
     },
     {
