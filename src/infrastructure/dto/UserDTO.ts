@@ -22,6 +22,11 @@ UserDTO.init(
             allowNull: false,
             unique: true
         },
+        email_is_confirmed: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
         password: {
             type: DataTypes.STRING(100),
             allowNull: false,
