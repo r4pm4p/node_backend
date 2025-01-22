@@ -18,101 +18,182 @@ import FollowersController from "../../application/controllers/FollowersControll
 import addPodiumRequest from "../../application/request/AddPodiumRequest";
 
 export class Router {
-  constructor(private server: FastifyInstance) { 
-    server.register(fastifyCors, {})
+  constructor(private server: FastifyInstance) {
+    server.register(fastifyCors, {});
   }
 
   public start = () => {
+    this.server.post(
+      "/login",
+      {
+        schema: loginRequest,
+      },
+      new LoginController().login
+    );
 
-    this.server.post("/login", {
-      schema: loginRequest
-    }, new LoginController().login);
+    this.server.get(
+      "/show/users/all",
+      {
+        preHandler: [Auth.admin],
+      },
+      new UserController().getAllUsers
+    );
 
-    this.server.get("/show/users/all", {
-      preHandler: [Auth.admin]
-    }, new UserController().getAllUsers);
-
-    this.server.get("/show/user/login/:id/history", {
-      preHandler: [Auth.admin],
-    }, new LoginController().getUserLoginHistory);
+    this.server.get(
+      "/show/user/login/:id/history",
+      {
+        preHandler: [Auth.admin],
+      },
+      new LoginController().getUserLoginHistory
+    );
 
     this.server.post("/register/user", new UserController().registerNewUser);
 
-    this.server.post("/register/mc", {
-      preHandler: [Auth.login],
-      schema: createMcRequest
-    }, new McController().registerNewMc);
+    this.server.post(
+      "/register/google/user",
+      new UserController().registerNewGoogleUser
+    );
 
-    this.server.post("/register/owner", {
-      preHandler: [Auth.login],
-      schema: createOwnerRequest
-    }, new OwnerController().registerNewOwner);
+    this.server.post(
+      "/register/mc",
+      {
+        preHandler: [Auth.login],
+        schema: createMcRequest,
+      },
+      new McController().registerNewMc
+    );
 
-    this.server.post("/register/admin", {
-      preHandler: [Auth.admin],
-      schema: createAdminRequest
-    }, new AdminController().registerNewAdmin);
+    this.server.post(
+      "/register/owner",
+      {
+        preHandler: [Auth.login],
+        schema: createOwnerRequest,
+      },
+      new OwnerController().registerNewOwner
+    );
 
-    this.server.post("/register/battle", {
-      preHandler: [Auth.owner],
-      schema: createBattleRequest
-    }, new BattleController().registerNewBattle);
+    this.server.post(
+      "/register/admin",
+      {
+        preHandler: [Auth.admin],
+        schema: createAdminRequest,
+      },
+      new AdminController().registerNewAdmin
+    );
 
-    this.server.get("/show/all/battle", {
-    }, new BattleController().getAllBattles);
+    this.server.post(
+      "/register/battle",
+      {
+        preHandler: [Auth.owner],
+        schema: createBattleRequest,
+      },
+      new BattleController().registerNewBattle
+    );
 
-    this.server.post("/register/event", {
-      preHandler: [Auth.owner],
-      schema: createEventRequest
-    }, new EventController().registerNewEvent);
+    this.server.get(
+      "/show/all/battle",
+      {},
+      new BattleController().getAllBattles
+    );
 
-    this.server.get("/show/all/event", {
-      preHandler: [Auth.login]
-    }, new EventController().getAllEvents);
+    this.server.post(
+      "/register/event",
+      {
+        preHandler: [Auth.owner],
+        schema: createEventRequest,
+      },
+      new EventController().registerNewEvent
+    );
 
-    this.server.post("/follow/mc/:mcId", {
-      preHandler: [Auth.login]
-    }, new FollowersController().followMc);
+    this.server.get(
+      "/show/all/event",
+      {
+        preHandler: [Auth.login],
+      },
+      new EventController().getAllEvents
+    );
 
-    this.server.post("/follow/battle/:battleId", {
-      preHandler: [Auth.login]
-    }, new FollowersController().followBattle);
+    this.server.post(
+      "/follow/mc/:mcId",
+      {
+        preHandler: [Auth.login],
+      },
+      new FollowersController().followMc
+    );
 
-    this.server.post("/confirm/presence/:eventId", {
-      preHandler: [Auth.login]
-    }, new EventController().userConfirmPresence)
+    this.server.post(
+      "/follow/battle/:battleId",
+      {
+        preHandler: [Auth.login],
+      },
+      new FollowersController().followBattle
+    );
 
-    this.server.post("/presence/event/:eventId", {
-      preHandler: [Auth.mc]
-    }, new McController().askPresenceOnEvent);
+    this.server.post(
+      "/confirm/presence/:eventId",
+      {
+        preHandler: [Auth.login],
+      },
+      new EventController().userConfirmPresence
+    );
 
-    this.server.post("/presence/confirm/:eventId", {
-      preHandler: [Auth.owner]
-    }, new OwnerController().confirmMcPresence);
+    this.server.post(
+      "/presence/event/:eventId",
+      {
+        preHandler: [Auth.mc],
+      },
+      new McController().askPresenceOnEvent
+    );
 
-    this.server.get("/presence/mc/:eventId", {
-      preHandler: [Auth.owner]
-    }, new OwnerController().getAllPresenceRequest);
+    this.server.post(
+      "/presence/confirm/:eventId",
+      {
+        preHandler: [Auth.owner],
+      },
+      new OwnerController().confirmMcPresence
+    );
 
-    this.server.post("/add/event/:eventId/podium", {
-      preHandler: [Auth.owner],
-      schema: addPodiumRequest
-    }, new EventController().addPodiumToEvent);
+    this.server.get(
+      "/presence/mc/:eventId",
+      {
+        preHandler: [Auth.owner],
+      },
+      new OwnerController().getAllPresenceRequest
+    );
+
+    this.server.post(
+      "/add/event/:eventId/podium",
+      {
+        preHandler: [Auth.owner],
+        schema: addPodiumRequest,
+      },
+      new EventController().addPodiumToEvent
+    );
 
     // DIVIDER
 
-    this.server.put("/update/battle/:battleId/profile", {
-      preHandler: [Auth.owner]
-    }, () => null);
+    this.server.put(
+      "/update/battle/:battleId/profile",
+      {
+        preHandler: [Auth.owner],
+      },
+      () => null
+    );
 
-    this.server.put("/update/event/:battleId/profile", {
-      preHandler: [Auth.owner]
-    }, () => null);
+    this.server.put(
+      "/update/event/:battleId/profile",
+      {
+        preHandler: [Auth.owner],
+      },
+      () => null
+    );
 
-    this.server.put("/update/mc/:mcId/profile", {
-      preHandler: [Auth.mc]
-    }, () => null);
-
-
+    this.server.put(
+      "/update/mc/:mcId/profile",
+      {
+        preHandler: [Auth.mc],
+      },
+      () => null
+    );
   };
 }
