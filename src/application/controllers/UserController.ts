@@ -5,6 +5,7 @@ import UserRepositoryImplementation from "../../infrastructure/repository/UserRe
 import ModelRepository from "../../domain/repository/ModelRepository";
 import LoginServices from "../services/LoginServices";
 import Jwt from "../Facades/Jwt";
+import { sequelize } from "../../infrastructure/database/Connection";
 
 export default class UserController implements Controller {
   modelRepository: ModelRepository;
@@ -13,10 +14,7 @@ export default class UserController implements Controller {
     this.modelRepository = new UserRepositoryImplementation();
   }
 
-  public getAllUsers = async (
-    request: FastifyRequest,
-    reply: FastifyReply
-  ): Promise<FastifyReply> => {
+  public getAllUsers = async (request: FastifyRequest, reply: FastifyReply) => {
     const userData = await this.modelRepository.findAll();
 
     return reply.send(userData);
@@ -46,6 +44,7 @@ export default class UserController implements Controller {
     request: FastifyRequest,
     reply: FastifyReply
   ) => {
+    const transaction = await sequelize.transaction();
     try {
       const data = request.body as any;
       const user: User = new User(
@@ -72,6 +71,8 @@ export default class UserController implements Controller {
 
       await loginServices.saveOnHistory();
 
+      await transaction.commit();
+
       return reply.code(200).send({
         status: 200,
         message: "Login confirmed",
@@ -80,6 +81,7 @@ export default class UserController implements Controller {
         },
       });
     } catch (e) {
+      await transaction.rollback();
       return reply.send(e);
     }
   };
