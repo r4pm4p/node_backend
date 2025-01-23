@@ -5,12 +5,12 @@ require("dotenv").config();
 
 const fastify: FastifyInstance = require("fastify")({ logger: true });
 
-Migration.sync()
+Migration.sync();
 
 const router: Router = new Router(fastify);
 router.start();
 
 fastify.listen({
   port: process.env.APP_PORT as number | undefined,
-  host: process.env.APP_HOST
+  host: process.env.APP_HOST,
 });
